@@ -11,6 +11,7 @@
         <module>spring-mybatis</module>
         <module>spring-aop</module>
         <module>spring-resource</module>
+        <module>spring-spel</module>
     </modules>
     <packaging>pom</packaging>
 
