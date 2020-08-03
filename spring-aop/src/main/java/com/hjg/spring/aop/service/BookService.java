@@ -6,5 +6,9 @@ public interface BookService {
 
     Book findByName(String name);
 
-    void updateBook(Book book);
+    void updateBookAll(Book book, String name, String author);
+
+    void updateBookName(Book book, String name);
+
+    void updateBookAuthor(Book book, String author);
 }

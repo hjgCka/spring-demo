@@ -18,7 +18,9 @@ public class AopApplication {
         Book book = bookService.findByName(name);
         System.out.println("book = " + book);
 
-        bookService.updateBook(book);
+        String newAuthor = "Jackson";
+        String newName = "Thinking in Java";
+        bookService.updateBookAll(book, newName, newAuthor);
         System.out.println("after update, book = " + book);
     }
 }
