@@ -17,7 +17,7 @@ public abstract class BookManager {
 
     DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss");
 
-    public Book setBook(String name, String author) {
+    public Book handleBookBean(String name, String author) {
         Book book = this.createBook();
         book.setName(name);
         book.setAuthor(author);

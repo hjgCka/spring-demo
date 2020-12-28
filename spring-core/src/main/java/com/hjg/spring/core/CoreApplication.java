@@ -28,7 +28,7 @@ public class CoreApplication {
                 logger.error("sleep异常", e);
             }
 
-            Book book = bookManager.setBook("Java", "James");
+            Book book = bookManager.handleBookBean("Java", "James");
             logger.info("book={}", book);
         }
 
