@@ -3,9 +3,11 @@ package com.hjg.spring.core;
 import com.hjg.spring.core.conf.BookManager;
 import com.hjg.spring.core.conf.MyConf;
 import com.hjg.spring.core.model.Book;
+import com.hjg.spring.core.model.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
@@ -19,9 +21,11 @@ public class CoreApplication {
 
     public static void main(String[] args) {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MyConf.class);
+
         BookManager bookManager = applicationContext.getBean(BookManager.class);
 
-        for(int i=0; i<5; i++) {
+        int length = 1;
+        for(int i=0; i<length; i++) {
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
@@ -32,5 +36,13 @@ public class CoreApplication {
             logger.info("book={}", book);
         }
 
+        ConfigurableApplicationContext cAppContext = (ConfigurableApplicationContext)applicationContext;
+        //cAppContext.close();
+        cAppContext.stop();
+
+        cAppContext.start();
+
+        Person person = cAppContext.getBean(Person.class);
+        logger.info("person = {}", person);
     }
 }

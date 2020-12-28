@@ -22,6 +22,9 @@ public class Book {
         System.out.println("postConstruct " + this.toString());
     }
 
+    /**
+     * 由于原型的bean，容器不会进行销毁的回调。
+     */
     @PreDestroy
     public void preDestruction() {
         System.out.println("preDestruction " + this.toString());
