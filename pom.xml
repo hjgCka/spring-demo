@@ -12,6 +12,7 @@
         <module>spring-aop</module>
         <module>spring-resource</module>
         <module>spring-spel</module>
+        <module>spring-core</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -20,6 +21,12 @@
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+        </dependency>
 
         <dependency>
             <groupId>junit</groupId>
