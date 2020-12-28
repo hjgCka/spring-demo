@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
+ * 使用method-injection，每次都创建新的实例。
  * @description:
  * @author: hjg
  * @createdOn: 2020/12/28
