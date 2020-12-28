@@ -37,6 +37,9 @@ public class CoreApplication {
         }
 
         ConfigurableApplicationContext cAppContext = (ConfigurableApplicationContext)applicationContext;
+        //这个钩子是对JVM的shutdown进行注册，来调用为bean配置的destroy方法
+        cAppContext.registerShutdownHook();
+
         //cAppContext.close();
         cAppContext.stop();
 
@@ -44,5 +47,7 @@ public class CoreApplication {
 
         Person person = cAppContext.getBean(Person.class);
         logger.info("person = {}", person);
+
+
     }
 }

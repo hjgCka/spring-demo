@@ -3,6 +3,8 @@ package com.hjg.spring.core.model;
 import lombok.Data;
 import org.springframework.context.Lifecycle;
 
+import javax.annotation.PreDestroy;
+
 /**
  *
  * 如果只实现Lifecycle接口，不会打印任何语句。
@@ -21,6 +23,11 @@ import org.springframework.context.Lifecycle;
 public class Person implements Lifecycle {
     private String name;
     private int age;
+
+    @PreDestroy
+    public void personDestroy() {
+        System.out.println("person pre-destroy...");
+    }
 
     @Override
     public void start() {
