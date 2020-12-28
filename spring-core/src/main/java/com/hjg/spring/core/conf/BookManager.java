@@ -15,7 +15,7 @@ import java.time.format.DateTimeFormatter;
 @Component
 public abstract class BookManager {
 
-    DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyyMMdd hh:mm:ss");
+    DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss");
 
     public Book setBook(String name, String author) {
         Book book = this.createBook();
