@@ -5,6 +5,7 @@ import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 
 /**
+ * BeanFactoryPostProcessor只作用于当前容器。
  * @description:
  * @author: hjg
  * @createdOn: 2020/12/29

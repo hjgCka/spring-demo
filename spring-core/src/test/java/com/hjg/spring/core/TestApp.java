@@ -4,6 +4,8 @@ import com.hjg.spring.core.conf.BookManager;
 import com.hjg.spring.core.conf.MyConf;
 import com.hjg.spring.core.model.Book;
 import com.hjg.spring.core.model.Person;
+import com.hjg.spring.core.model.movie.MovieCatalog;
+import com.hjg.spring.core.model.movie.MovieRecommender;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -11,6 +13,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import java.util.stream.Stream;
 
 /**
  * @description:
@@ -66,4 +70,15 @@ public class TestApp {
         logger.info("person = {}", person);
     }
 
+    @Test
+    public void qualifierTest() {
+        //获取bean name列表
+        String[] names = applicationContext.getBeanNamesForType(MovieCatalog.class);
+        Stream.of(names).forEach(e -> System.out.println(e));
+
+        MovieRecommender recommender = applicationContext.getBean(MovieRecommender.class);
+        recommender.printTargetCatalog();
+
+        recommender.printAllCatalog();
+    }
 }
