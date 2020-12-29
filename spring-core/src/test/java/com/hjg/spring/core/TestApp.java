@@ -48,6 +48,9 @@ public class TestApp {
         }
     }
 
+    /**
+     * 测试容器的启动和停止。
+     */
     @Test
     public void startAndStopTest() {
         ConfigurableApplicationContext cAppContext = (ConfigurableApplicationContext)applicationContext;
