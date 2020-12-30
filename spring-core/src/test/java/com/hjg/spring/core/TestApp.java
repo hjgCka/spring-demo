@@ -99,5 +99,9 @@ public class TestApp {
         ApplicationContext parent = applicationContext.getParent();
         MovieRecommender recommender = parent.getBean(MovieRecommender.class);
         recommender.printTargetCatalog();
+
+        //这个bean名称来自parent容器。
+        MovieRecommender movieRecommender = (MovieRecommender)applicationContext.getBean("movieRecommender");
+        movieRecommender.printAllCatalog();
     }
 }
