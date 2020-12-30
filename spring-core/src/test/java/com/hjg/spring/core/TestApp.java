@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.stream.Stream;
 
@@ -70,6 +71,9 @@ public class TestApp {
         logger.info("person = {}", person);
     }
 
+    /**
+     * 测试@Qualifier注解
+     */
     @Test
     public void qualifierTest() {
         //获取bean name列表
@@ -80,5 +84,20 @@ public class TestApp {
         recommender.printTargetCatalog();
 
         recommender.printAllCatalog();
+    }
+
+    /**
+     * 测试父子容器。
+     */
+    @Test
+    public void parentTest() {
+        ApplicationContext xmlContext = new ClassPathXmlApplicationContext("classpath:application.xml");
+
+        ConfigurableApplicationContext cAppContext = (ConfigurableApplicationContext)applicationContext;
+        cAppContext.setParent(xmlContext);
+
+        ApplicationContext parent = applicationContext.getParent();
+        MovieRecommender recommender = parent.getBean(MovieRecommender.class);
+        recommender.printTargetCatalog();
     }
 }
