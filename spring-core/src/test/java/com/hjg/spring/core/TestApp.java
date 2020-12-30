@@ -14,6 +14,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.core.env.Environment;
 
 import java.util.Properties;
@@ -120,5 +121,11 @@ public class TestApp {
 
         Environment appEnv = applicationContext.getEnvironment();
         System.out.println("appEnv = " + appEnv.getProperty("datasource.user"));
+    }
+
+    @Test
+    public void basicContainerTest() {
+        GenericApplicationContext  genericContext = (GenericApplicationContext)applicationContext;
+
     }
 }
