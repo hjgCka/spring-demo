@@ -6,10 +6,7 @@ import com.hjg.spring.core.model.movie.MovieRecommender;
 import com.hjg.spring.core.model.movie.SimpleMovieCatalog;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.*;
 
 /**
  * @description:
@@ -18,6 +15,7 @@ import org.springframework.context.annotation.Scope;
  */
 @Configuration
 @ComponentScan(basePackageClasses = {BookManager.class})
+@PropertySource({"classpath:/com/hjg/data/jdbc.properties"})
 public class MyConf {
 
     @Bean

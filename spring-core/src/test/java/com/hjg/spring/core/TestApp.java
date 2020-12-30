@@ -14,7 +14,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.core.env.Environment;
 
+import java.util.Properties;
 import java.util.stream.Stream;
 
 /**
@@ -27,10 +29,12 @@ public class TestApp {
     private static final Logger logger = LoggerFactory.getLogger(TestApp.class);
 
     private ApplicationContext applicationContext;
+    private ApplicationContext xmlAppContext;
 
     @Before
     public void init() {
         applicationContext = new AnnotationConfigApplicationContext(MyConf.class);
+        xmlAppContext = new ClassPathXmlApplicationContext("classpath:application.xml");
     }
 
     /**
@@ -103,5 +107,18 @@ public class TestApp {
         //这个bean名称来自parent容器。
         MovieRecommender movieRecommender = (MovieRecommender)applicationContext.getBean("movieRecommender");
         movieRecommender.printAllCatalog();
+    }
+
+    /**
+     * 测试properties数据。
+     */
+    @Test
+    public void propertiesTest() {
+        //PropertiesFactoryBean是一个FactoryBean，通过名称获取的bean实际上是它的产品，即getObject()返回的对象。
+        Properties xmlPros = (Properties)xmlAppContext.getBean("jdbcConfiguration");
+        System.out.println("xmlEnv = " + xmlPros.getProperty("datasource.user"));
+
+        Environment appEnv = applicationContext.getEnvironment();
+        System.out.println("appEnv = " + appEnv.getProperty("datasource.user"));
     }
 }

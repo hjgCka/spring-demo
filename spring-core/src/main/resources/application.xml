@@ -2,12 +2,32 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
-        https://www.springframework.org/schema/context/spring-context.xsd">
+        https://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/util
+        https://www.springframework.org/schema/util/spring-util.xsd">
 
+    <!--注册多种后置处理器-->
     <context:annotation-config/>
+
+    <!--<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations" value="classpath:com/foo/jdbc.properties"/>
+    </bean>-->
+    <!--
+       更推荐的方式，但其实只是实例化了org.springframework.beans.factory.config.PropertyPlaceholderConfigurer对象。
+       这个对象是BeanFactoryPostProcessor，作用于bean的配置元数据，用来替换<bean>元素中的占位符。
+    -->
+    <context:property-placeholder location="classpath:com/hjg/data/jdbc.properties"/>
+
+    <!--想要在代码中使用properties文件内容，需要注入这个bean，且其实际类型为Properties-->
+    <!--<bean id="jdbcConfiguration" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="location" value="classpath:com/hjg/data/jdbc.properties"/>
+    </bean>-->
+    <!-- creates a java.util.Properties instance with values loaded from the supplied location -->
+    <util:properties id="jdbcConfiguration" location="classpath:com/hjg/data/jdbc.properties"/>
 
     <bean class="com.hjg.spring.core.model.movie.SimpleMovieCatalog">
         <constructor-arg type="java.lang.String" value="main"/>
