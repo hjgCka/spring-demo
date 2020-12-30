@@ -1,6 +1,5 @@
 package com.hjg.spring.core.model.movie;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
