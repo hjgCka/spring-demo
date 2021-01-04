@@ -40,11 +40,20 @@ public class TestJavaBean {
 
     @Test
     public void testPropertyEditor() throws IntrospectionException {
-        //属性编辑器与属性进行关联，有2种方法，推荐第一种方法
+        //属性编辑器与属性进行关联，有3种方法，推荐如下的第一种方法
         PropertyEditorManager.registerEditor(Employee.class, EmployeePropertyEditor.class);
 
-        /*PropertyDescriptor pd = new PropertyDescriptor("managingDirector", Company.class);
-        pd.setPropertyEditorClass(EmployeePropertyEditor.class);*/
+        /*
+        第二种通过pd进行设置
+        PropertyDescriptor pd = new PropertyDescriptor("managingDirector", Company.class);
+        pd.setPropertyEditorClass(EmployeePropertyEditor.class);
+        */
+
+        /**
+         *  第三种通过名称搜索，这种方式避免注册代码。
+         *  1，添加Editor到对应类名的，全限定类名之后。
+         *  2，添加Editor到类名之后，并且搜索classpath
+         */
 
         Map<String, String> params = new HashMap<>();
         params.put("name", "IBM");
