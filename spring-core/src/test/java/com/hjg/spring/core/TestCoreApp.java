@@ -25,9 +25,9 @@ import java.util.stream.Stream;
  * @author: hjg
  * @createdOn: 2020/12/29
  */
-public class TestApp {
+public class TestCoreApp {
 
-    private static final Logger logger = LoggerFactory.getLogger(TestApp.class);
+    private static final Logger logger = LoggerFactory.getLogger(TestCoreApp.class);
 
     private ApplicationContext applicationContext;
     private ApplicationContext xmlAppContext;
