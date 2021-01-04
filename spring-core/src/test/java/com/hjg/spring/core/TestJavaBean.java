@@ -29,12 +29,12 @@ public class TestJavaBean {
         BeanInfo company = JavaBeansUtil.getClassBeanInfo(Company.class);
         JavaBeansUtil.printBeanInfo(company);
 
+        //自动关联到ManagerBeanInfo
         System.out.println("\n\n\nmanager");
         BeanInfo manager = JavaBeansUtil.getClassBeanInfo(Manager.class);
         JavaBeansUtil.printBeanInfo(manager);
 
         System.out.println("\n\n\nManagerBeanInfo");
-        //如果需要使用自定义的BeanInfo，那么要直接实例化。
         JavaBeansUtil.printBeanInfo(new ManagerBeanInfo());
     }
 
