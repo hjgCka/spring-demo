@@ -8,7 +8,7 @@ import java.beans.PropertyEditorSupport;
  * @author: hjg
  * @createdOn: 2020/12/31
  */
-public class EmployeePropertyEditor extends PropertyEditorSupport {
+public class EmployeeEditor extends PropertyEditorSupport {
 
     @Override
     public void setValue(Object value) {

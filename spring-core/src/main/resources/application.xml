@@ -17,8 +17,8 @@
         <property name="locations" value="classpath:com/foo/jdbc.properties"/>
     </bean>-->
     <!--
-       更推荐的方式，但其实只是实例化了org.springframework.beans.factory.config.PropertyPlaceholderConfigurer对象。
-       这个对象是BeanFactoryPostProcessor，作用于bean的配置元数据，用来替换<bean>元素中的占位符。
+       这是更推荐的方式，但其实只是实例化了org.springframework.beans.factory.config.PropertyPlaceholderConfigurer对象。
+       这个对象是BeanFactoryPostProcessor，作用于bean的配置元数据，用来替换xml文件中的<bean>元素中的占位符。
     -->
     <context:property-placeholder location="classpath:com/hjg/data/jdbc.properties"/>
 
@@ -43,4 +43,20 @@
 
     <bean id="movieRecommender" class="com.hjg.spring.core.model.movie.MovieRecommender"/>
 
+    <!--测试属性编辑器-->
+    <bean class="com.hjg.spring.core.javabeans.Company">
+        <property name="name" value="Bush"/>
+        <property name="managingDirector" value="Jordan|8888"/>
+    </bean>
+
+    <!--<bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+        <property name="propertyEditorRegistrars">
+            <list>
+                <ref bean="myPropertyEditorRegistrar"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="myPropertyEditorRegistrar"
+          class="com.hjg.spring.core.conf.editor.MyPropertyEditorRegistrar"/>-->
 </beans>

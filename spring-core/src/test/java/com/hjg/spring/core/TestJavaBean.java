@@ -41,7 +41,7 @@ public class TestJavaBean {
     @Test
     public void testPropertyEditor() throws IntrospectionException {
         //属性编辑器与属性进行关联，有3种方法，推荐如下的第一种方法
-        PropertyEditorManager.registerEditor(Employee.class, EmployeePropertyEditor.class);
+        PropertyEditorManager.registerEditor(Employee.class, EmployeeEditor.class);
 
         /*
         第二种通过pd进行设置
@@ -59,6 +59,7 @@ public class TestJavaBean {
         params.put("name", "IBM");
         params.put("managingDirector", "James|5000");
 
+        //每个Company对象都有一个PropertyEditor
         Company company = JavaBeansUtil.convert2Company(params);
         System.out.println(company);
     }
