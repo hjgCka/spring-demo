@@ -4,6 +4,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyEditorSupport;
 
 /**
+ * 通过添加Editor，默认成为了Employee的属性编辑器。
  * @description:
  * @author: hjg
  * @createdOn: 2020/12/31
