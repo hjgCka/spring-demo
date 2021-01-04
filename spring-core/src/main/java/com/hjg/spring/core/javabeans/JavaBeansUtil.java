@@ -26,8 +26,11 @@ public class JavaBeansUtil {
          * Introspector.IGNORE_IMMEDIATE_BEANINFO
          * Introspector.IGNORE_ALL_BEANINFO
          *
+         * 通过查看Introspector的文档，默认情况下如果Bean有一个对应的'Bean'BeanInfo类存在，
+         * 那么就会使用这个类作为BeanInfo。
+         * 这种行为通过Introspector的3个标志进行控制。
          */
-        BeanInfo beanInfo = Introspector.getBeanInfo(cls, Introspector.IGNORE_IMMEDIATE_BEANINFO);
+        BeanInfo beanInfo = Introspector.getBeanInfo(cls, Introspector.USE_ALL_BEANINFO);
         return beanInfo;
     }
 
