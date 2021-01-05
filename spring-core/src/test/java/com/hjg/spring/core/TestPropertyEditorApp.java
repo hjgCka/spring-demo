@@ -14,7 +14,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @author: hjg
  * @createdOn: 2020/12/31
  */
-public class TestConvertApp {
+public class TestPropertyEditorApp {
 
     @Test
     public void beanwrapperTest() {
