@@ -9,6 +9,8 @@ import org.springframework.beans.PropertyValue;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.beans.PropertyDescriptor;
+
 /**
  * @description:
  * @author: hjg
@@ -34,8 +36,10 @@ public class TestPropertyEditorApp {
 
         System.out.println(company.getPropertyValue("managingDirector.salary"));
 
-        //能够用这个方法设置自定义的PropertyEditor
+        //能够用这个方法设置自定义的PropertyEditor，但是并不推荐。使用标准机制更好。
         //company.registerCustomEditor();
+
+        PropertyDescriptor pd = company.getPropertyDescriptor("name");
     }
 
     /**

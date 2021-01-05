@@ -59,4 +59,15 @@
 
     <bean id="myPropertyEditorRegistrar"
           class="com.hjg.spring.core.conf.editor.MyPropertyEditorRegistrar"/>-->
+
+    <!--如果有这样id的bean，就不会再使用PropertyEditor-->
+    <bean id="conversionService"
+          class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean class="com.hjg.spring.core.conf.convert.MyConverter"/>
+            </set>
+        </property>
+    </bean>
+
 </beans>
