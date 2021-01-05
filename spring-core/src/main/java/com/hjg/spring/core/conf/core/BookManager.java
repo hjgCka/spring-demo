@@ -1,4 +1,4 @@
-package com.hjg.spring.core.conf;
+package com.hjg.spring.core.conf.core;
 
 import com.hjg.spring.core.model.Book;
 import org.springframework.beans.factory.annotation.Lookup;

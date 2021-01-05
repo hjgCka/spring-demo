@@ -20,4 +20,8 @@ public class TestConverter {
         Company company = applicationContext.getBean(Company.class);
         System.out.println(company);
     }
+
+    /**
+     * 以Java进行的配置，除非是在web环境中使用web mvc，否则converter和formatter不好验证。
+     */
 }

@@ -1,6 +1,6 @@
 package com.hjg.spring.core;
 
-import com.hjg.spring.core.conf.BookManager;
+import com.hjg.spring.core.conf.core.BookManager;
 import com.hjg.spring.core.conf.MyConf;
 import com.hjg.spring.core.model.Book;
 import com.hjg.spring.core.model.Person;
