@@ -4,6 +4,10 @@ import lombok.Data;
 import org.springframework.context.Lifecycle;
 
 import javax.annotation.PreDestroy;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -21,7 +25,13 @@ import javax.annotation.PreDestroy;
  */
 @Data
 public class Person implements Lifecycle {
+
+    @NotNull
+    @NotEmpty
+    @Size(min = 2)
     private String name;
+
+    @Min(0)
     private int age;
 
     @PreDestroy

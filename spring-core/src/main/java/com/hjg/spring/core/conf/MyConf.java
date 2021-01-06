@@ -5,6 +5,7 @@ import com.hjg.spring.core.conf.core.BookManager;
 import com.hjg.spring.core.conf.formatter.EmployeeAnnotationFormatterFactory;
 import com.hjg.spring.core.model.Book;
 import com.hjg.spring.core.model.Person;
+import com.hjg.spring.core.model.Worker;
 import com.hjg.spring.core.model.movie.MovieRecommender;
 import com.hjg.spring.core.model.movie.SimpleMovieCatalog;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,6 +16,7 @@ import org.springframework.format.datetime.DateFormatterRegistrar;
 import org.springframework.format.number.NumberFormatAnnotationFormatterFactory;
 import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.format.support.FormattingConversionService;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 /**
  * @description:
@@ -27,8 +29,21 @@ import org.springframework.format.support.FormattingConversionService;
 public class MyConf {
 
     @Bean
+    LocalValidatorFactoryBean validator() {
+        return new LocalValidatorFactoryBean();
+    }
+
+    @Bean
+    Worker worker() {
+        return new Worker();
+    }
+
+    @Bean
     Person person() {
-        return new Person();
+        Person person = new Person();
+        person.setAge(30);
+        person.setName("Jack");
+        return person;
     }
 
     @Bean
