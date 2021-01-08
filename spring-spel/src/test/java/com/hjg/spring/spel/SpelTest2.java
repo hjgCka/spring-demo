@@ -1,7 +1,7 @@
 package com.hjg.spring.spel;
 
-import com.hjg.spring.spel.model.Inventor;
-import com.hjg.spring.spel.model.Society;
+import com.hjg.spring.spel.model.model.Inventor;
+import com.hjg.spring.spel.model.model.Society;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -81,5 +81,19 @@ public class SpelTest2 {
 
         boolean result = expression.getValue(simpleEvaluationContext, simple, Boolean.class);
         Assert.assertEquals(false, result);
+    }
+
+    @Test
+    public void contextRootTest() {
+        List<Integer> primes = new ArrayList<Integer>();
+        primes.addAll(Arrays.asList(2,3,5,7,11,13,17));
+
+        simpleEvaluationContext.setVariable("primes", primes);
+
+        //访问变量时采用#
+        List<Integer> result =
+                (List<Integer>)parser.parseExpression("#primes.?[#this>10]")
+                        .getValue(simpleEvaluationContext);
+        System.out.println(result);
     }
 }

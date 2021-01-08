@@ -1,6 +1,6 @@
 package com.hjg.spring.spel;
 
-import com.hjg.spring.spel.model.Inventor;
+import com.hjg.spring.spel.model.model.Inventor;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.expression.Expression;

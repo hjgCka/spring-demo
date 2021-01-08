@@ -1,4 +1,4 @@
-package com.hjg.spring.spel.model;
+package com.hjg.spring.spel.model.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
