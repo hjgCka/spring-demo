@@ -1,7 +1,9 @@
 package com.hjg.spring.spel;
 
 import com.hjg.spring.spel.model.model.Inventor;
+import com.hjg.spring.spel.model.model.PlaceOfBirth;
 import com.hjg.spring.spel.model.model.Society;
+import lombok.Getter;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,9 +14,7 @@ import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.SimpleEvaluationContext;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * @description:
@@ -62,7 +62,8 @@ public class SpelTest2 {
     }
 
     class Simple {
-        public List<Boolean> booleanList = new ArrayList<Boolean>();
+        @Getter
+        private List<Boolean> booleanList = new ArrayList<Boolean>();
     }
 
     /**
@@ -71,12 +72,13 @@ public class SpelTest2 {
     @Test
     public void simpleContextTest() {
 
+        //**********访问外部类访问内部类时，可以直接访问内部类属性，即使它是private***********
         Simple simple = new Simple();
         simple.booleanList.add(true);
+        System.out.println(simple.booleanList);
 
         Expression expression = parser.parseExpression("booleanList[0]");
         expression.setValue(simpleEvaluationContext, simple, "false");
-
         System.out.println(simple.booleanList);
 
         boolean result = expression.getValue(simpleEvaluationContext, simple, Boolean.class);
@@ -95,5 +97,50 @@ public class SpelTest2 {
                 (List<Integer>)parser.parseExpression("#primes.?[#this>10]")
                         .getValue(simpleEvaluationContext);
         System.out.println(result);
+    }
+
+    @Test
+    public void dataBindingTest() {
+
+        //为了使用setValue需要使用forReadWriteDataBinding
+        SimpleEvaluationContext simpleEvaluationContext = SimpleEvaluationContext.forReadWriteDataBinding().build();
+
+        Inventor jack = new Inventor();
+        jack.setName("Jack");
+        PlaceOfBirth pb1 = new PlaceOfBirth();
+        pb1.setCountry("USA");
+        pb1.setCity("NYC");
+        jack.setPlaceOfBirth(pb1);
+
+        Inventor jim = new Inventor();
+        jim.setName("Jim");
+        PlaceOfBirth pb2 = new PlaceOfBirth();
+        pb2.setCountry("UK");
+        pb2.setCity("London");
+        jim.setPlaceOfBirth(pb2);
+        //使用数组
+        Inventor[] array = new Inventor[]{jim};
+
+        Map officers = new HashMap();
+        officers.put(Society.President, jack);
+        officers.put(Society.Advisors,  array);
+
+        society.setOfficers(officers);
+
+        Inventor pupin = parser.parseExpression("Officers['president']").getValue(
+                simpleEvaluationContext, society, Inventor.class);
+        System.out.println(pupin);
+
+        // evaluates to "Idvor"
+        String city = parser.parseExpression("Officers['president'].PlaceOfBirth.City").getValue(
+                simpleEvaluationContext, society, String.class);
+        System.out.println(city);
+
+        // setting values，如果要使用setValue方法，必须forReadWriteDataBinding来构造SimpleEvaluationContext
+        //即使PlaceOfBirth.country字段是public也无法使用setValue方法
+        parser.parseExpression("Officers['advisors'][0].PlaceOfBirth.Country").setValue(
+                simpleEvaluationContext, society, "Croatia");
+        System.out.println(jim);
+
     }
 }

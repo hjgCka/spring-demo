@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PlaceOfBirth {
     private String city;
-    private String country;
+    public String country;
 }
