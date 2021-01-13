@@ -19,7 +19,8 @@ public class Book {
 
     @PostConstruct
     public void postConstruct() {
-        System.out.println("postConstruct " + this.toString());
+        String threadName = Thread.currentThread().getName();
+        System.out.println("threadName = " + threadName + ", postConstruct " + this.toString());
     }
 
     /**
@@ -27,6 +28,7 @@ public class Book {
      */
     @PreDestroy
     public void preDestruction() {
-        System.out.println("preDestruction " + this.toString());
+        String threadName = Thread.currentThread().getName();
+        System.out.println("threadName = " + threadName + ", preDestruction " + this.toString());
     }
 }

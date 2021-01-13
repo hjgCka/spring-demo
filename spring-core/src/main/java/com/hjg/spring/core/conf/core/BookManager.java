@@ -9,6 +9,11 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * 使用method-injection，每次都创建新的实例。
+ * 使用原型模式以及方法注入时，不要和代理结合使用，spring-aop只应用于container管理的bean
+ * 严格来说，原型模式并不是spring容器进行管理。
+ *
+ * 对于request级别或session作用域的bean，可以使用aop进行代理。
+ *
  * @description:
  * @author: hjg
  * @createdOn: 2020/12/28
@@ -20,7 +25,9 @@ public abstract class BookManager {
 
     public Book handleBookBean(String name, String author) {
         Book book = this.createBook();
+
         book.setName(name);
+
         book.setAuthor(author);
 
         LocalDateTime now = LocalDateTime.now();

@@ -1,7 +1,7 @@
 package com.hjg.spring.core;
 
-import com.hjg.spring.core.conf.core.BookManager;
 import com.hjg.spring.core.conf.MyConf;
+import com.hjg.spring.core.conf.core.BookManager;
 import com.hjg.spring.core.model.Book;
 import com.hjg.spring.core.model.Person;
 import com.hjg.spring.core.model.movie.MovieCatalog;
@@ -48,7 +48,7 @@ public class TestCoreApp {
         int length = 5;
         for(int i=0; i<length; i++) {
             try {
-                Thread.sleep(2000);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 logger.error("sleep异常", e);
             }
