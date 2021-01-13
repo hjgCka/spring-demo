@@ -46,6 +46,10 @@ public class MyConf {
         return person;
     }
 
+    /**
+     * 用于方法注入，查看BookManager
+     * @return
+     */
     @Bean
     @Scope(scopeName = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
     Book book() {
