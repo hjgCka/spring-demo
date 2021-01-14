@@ -1,6 +1,7 @@
 package com.hjg.spring.core.model;
 
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.Lifecycle;
 
 import javax.annotation.PreDestroy;
@@ -33,6 +34,14 @@ public class Person implements Lifecycle {
 
     @Min(0)
     private int age;
+
+    /**
+     * 仅为了测试用，实际编程不会这样用。
+     */
+    @Autowired
+    private void auto() {
+        System.out.println("autowired empty method");
+    }
 
     @PreDestroy
     public void personDestroy() {
