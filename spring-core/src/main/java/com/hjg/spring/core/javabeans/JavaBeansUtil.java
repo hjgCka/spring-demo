@@ -2,8 +2,10 @@ package com.hjg.spring.core.javabeans;
 
 import java.beans.*;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -57,7 +59,14 @@ public class JavaBeansUtil {
         MethodDescriptor[] methodDescriptors = beanInfo.getMethodDescriptors();
         for(int i=0; i<methodDescriptors.length; i++) {
             MethodDescriptor md = methodDescriptors[i];
-            System.out.println("i=" + i + ", method = " + md.getName());
+
+            String params = "empty";
+            ParameterDescriptor[] pds = md.getParameterDescriptors();
+            if(pds != null && pds.length > 0) {
+                params = Arrays.stream(pds).map(pd -> pd.getName()).collect(Collectors.joining(","));
+            }
+
+            System.out.println("i=" + i + ", method = " + md.getName() + ", params = " + params);
         }
 
         PropertyDescriptor[] descriptors = beanInfo.getPropertyDescriptors();

@@ -29,6 +29,11 @@
     <!-- creates a java.util.Properties instance with values loaded from the supplied location -->
     <util:properties id="jdbcConfiguration" location="classpath:com/hjg/data/jdbc.properties"/>
 
+    <bean class="com.hjg.spring.core.model.Phone">
+        <constructor-arg name="price2" value="5000"/>
+        <constructor-arg name="name2" value="iPhone"/>
+    </bean>
+
     <bean class="com.hjg.spring.core.model.movie.SimpleMovieCatalog">
         <constructor-arg type="java.lang.String" value="main"/>
         <qualifier value="main"/>

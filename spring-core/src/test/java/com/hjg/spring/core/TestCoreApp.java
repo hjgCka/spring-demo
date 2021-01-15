@@ -4,6 +4,7 @@ import com.hjg.spring.core.conf.MyConf;
 import com.hjg.spring.core.conf.core.BookManager;
 import com.hjg.spring.core.model.Book;
 import com.hjg.spring.core.model.Person;
+import com.hjg.spring.core.model.Phone;
 import com.hjg.spring.core.model.movie.MovieCatalog;
 import com.hjg.spring.core.model.movie.MovieRecommender;
 import org.junit.Before;
@@ -36,6 +37,12 @@ public class TestCoreApp {
     public void init() {
         applicationContext = new AnnotationConfigApplicationContext(MyConf.class);
         xmlAppContext = new ClassPathXmlApplicationContext("classpath:application.xml");
+    }
+
+    @Test
+    public void phoneTest() {
+        Phone phone = xmlAppContext.getBean(Phone.class);
+        System.out.println(phone);
     }
 
     /**
