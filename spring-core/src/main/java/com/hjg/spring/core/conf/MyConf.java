@@ -13,6 +13,7 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.*;
 import org.springframework.format.datetime.DateFormatter;
 import org.springframework.format.datetime.DateFormatterRegistrar;
+import org.springframework.format.datetime.DateTimeFormatAnnotationFormatterFactory;
 import org.springframework.format.number.NumberFormatAnnotationFormatterFactory;
 import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.format.support.FormattingConversionService;
@@ -81,11 +82,12 @@ public class MyConf {
         DefaultFormattingConversionService conversionService = new
                 DefaultFormattingConversionService(false);
 
-        // Ensure @NumberFormat is still supported
+        // Ensure @NumberFormat @DateFormat is still supported
         conversionService.addFormatterForFieldAnnotation(new NumberFormatAnnotationFormatterFactory());
+        conversionService.addFormatterForFieldAnnotation(new DateTimeFormatAnnotationFormatterFactory());
         conversionService.addFormatterForFieldAnnotation(new EmployeeAnnotationFormatterFactory());
 
-        //注册converter，与xml配置不同的是，converter使用场景是什么??
+        //注册converter，与xml配置不同的是，converter使用场景是web
         conversionService.addConverter(new MyConverter());
 
         // Register date conversion with a specific global format
