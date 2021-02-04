@@ -2,13 +2,10 @@ package com.hjg.spring.transaction.service.impl;
 
 import com.hjg.spring.transaction.mapper.BlogMapper;
 import com.hjg.spring.transaction.model.Blog;
-import com.hjg.spring.transaction.service.BlogService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 /**
  * @description:
@@ -16,33 +13,19 @@ import java.util.List;
  * @createdOn: 2021/2/4
  */
 @Repository
-public class BlogServiceImpl implements BlogService {
+public class BlogServiceImpl2 {
 
-    private static final Logger logger = LoggerFactory.getLogger(BlogServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(BlogServiceImpl2.class);
 
     @Autowired
     private BlogMapper blogMapper;
 
-    @Override
-    public Blog getBlogById(String id) {
-        Blog blog = blogMapper.findById(id);
-        logger.info("blog = {}", blog);
-        return blog;
-    }
-
-    @Override
-    public List<Blog> getAllBlogs() {
-        List<Blog> blogs = this.blogMapper.queryBlogs();
-        return blogs;
-    }
-
     /**
-     * 实现了接口，会使用JDK进行动态代理。
+     * 没有实现接口，会使用CGLIB进行动态代理。
      * @param blog
      * @param newTitle
      * @return
      */
-    @Override
     public Blog saveAndUpdate(Blog blog, String newTitle) {
         this.blogMapper.insertBlog(blog);
 

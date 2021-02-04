@@ -3,6 +3,7 @@ package com.hjg.spring.transaction;
 import com.hjg.spring.transaction.mapper.BlogMapper;
 import com.hjg.spring.transaction.model.Blog;
 import com.hjg.spring.transaction.service.BlogService;
+import com.hjg.spring.transaction.service.impl.BlogServiceImpl2;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -47,6 +48,19 @@ public class AppTest {
 
         String newTitle = "Thinking in Java";
         Blog blog = blogService.saveAndUpdate(new Blog()
+                        .setTitle("Thinking in C++")
+                        .setCreateTime(new Date()),
+                newTitle);
+
+        System.out.println(blog);
+    }
+
+    @Test
+    public void trasactionTest2() {
+        BlogServiceImpl2 blogServiceImpl2 = applicationContext.getBean(BlogServiceImpl2.class);
+
+        String newTitle = "Thinking in Java";
+        Blog blog = blogServiceImpl2.saveAndUpdate(new Blog()
                         .setTitle("Thinking in C++")
                         .setCreateTime(new Date()),
                 newTitle);
