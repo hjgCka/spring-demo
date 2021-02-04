@@ -2,19 +2,22 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
         https://www.springframework.org/schema/context/spring-context.xsd
-        http://www.springframework.org/schema/util
-        https://www.springframework.org/schema/util/spring-util.xsd">
+        http://www.springframework.org/schema/aop
+        https://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx
+        https://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!--注册多种后置处理器，支持@Autowired等注解-->
     <context:annotation-config/>
 
     <!--自动实例化这个包下面的带上了@Repository等注解的类。-->
-    <context:component-scan base-package="com.hjg.spring.transaction.service.impl"/>
+    <!--<context:component-scan base-package="com.hjg.spring.transaction.service.impl"/>-->
 
     <!--<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations" value="classpath:com/foo/jdbc.properties"/>
@@ -51,5 +54,29 @@
         <property name="basePackage" value="com.hjg.spring.transaction.mapper"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
+
+    <!--*********开始配置事务***********-->
+    <bean id="blogService" class="com.hjg.spring.transaction.service.impl.BlogServiceImpl"/>
+
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <!--事务语义-->
+        <tx:attributes>
+            <!--以get开头的方法是只读-->
+            <tx:method name="get*" read-only="true"/>
+            <!--其它方法使用默认事务设置-->
+            <tx:method name="*"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <!--
+      为Service层产生的所有Bean，创建环绕的事务代理。
+      这个代理被配置了事务增强，在代理上调用某些方法时，一个事务会开始、挂起、标记为只读等等，
+      这些基于方法上的事务配置。
+    -->
+    <aop:config>
+        <!--Service层接口的返回任何值、任何方法、任何方法参数都会被增强-->
+        <aop:pointcut id="serviceMethods" expression="execution(* com.hjg.spring.transaction.service.*.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods"/>
+    </aop:config>
 
 </beans>

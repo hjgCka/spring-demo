@@ -12,4 +12,10 @@
         <typeAlias alias="blog" type="com.hjg.spring.transaction.model.Blog"/>
     </typeAliases>
 
+    <!--Mapper.xml中，使用mysql和oracle即可切换不同sql-->
+    <databaseIdProvider type="DB_VENDOR">
+        <property name="MySQL" value="mysql"/>
+        <property name="Oracle" value="oracle" />
+    </databaseIdProvider>
+
 </configuration>

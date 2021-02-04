@@ -2,6 +2,8 @@ package com.hjg.spring.transaction.service;
 
 import com.hjg.spring.transaction.model.Blog;
 
+import java.util.List;
+
 /**
  * @description:
  * @author: hjg
@@ -10,4 +12,8 @@ import com.hjg.spring.transaction.model.Blog;
 public interface BlogService {
 
     Blog getBlogById(String id);
+
+    List<Blog> getAllBlogs();
+
+    Blog saveAndUpdate(Blog blog, String newTitle);
 }

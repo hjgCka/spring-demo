@@ -10,4 +10,32 @@
         FROM t_blog WHERE id_ = #{id}
     </select>
 
+    <select id="findByTitle" resultType="blog">
+        SELECT
+            id_ AS id, title_ AS title, create_time_ AS createTime
+        FROM t_blog WHERE title_ = #{title}
+    </select>
+
+    <!--返回结果是集合，resultType应该是集合包含的类型-->
+    <select id="queryBlogs" resultType="blog">
+        SELECT
+            id_ AS id, title_ AS title, create_time_ AS createTime
+        FROM t_blog
+    </select>
+
+    <insert id="insertBlog" parameterType="blog">
+        INSERT INTO t_blog(title_, create_time_) values (#{title}, #{createTime})
+    </insert>
+
+    <insert id="insertBlogList">
+        INSERT INTO t_blog(title_, create_time_) values
+        <foreach collection="list" item="blog" separator=",">
+            (#{blog.title}, #{blog.createTime})
+        </foreach>
+    </insert>
+
+    <update id="updateBlog" parameterType="blog">
+        UPDATE t_blog SET title_ = #{blog.title}, create_time_ = #{blog.createTime} WHERE title_ = #{oldTitle}
+    </update>
+
 </mapper>
