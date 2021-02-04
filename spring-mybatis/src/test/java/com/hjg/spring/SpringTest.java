@@ -1,4 +1,4 @@
-package java.com.hjg.spring;
+package com.hjg.spring;
 
 import org.junit.Test;
 import org.springframework.core.io.Resource;
@@ -16,7 +16,7 @@ public class SpringTest {
     @Test
     public void resourceTest() throws IOException {
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        String packageLocation = "com/hjg/mybatis/spring/com.hjg.mybatis.spring.example/model";
+        String packageLocation = "com/hjg/mybatis/spring/example/model";
         Resource[] resources = resolver.getResources(packageLocation + "/**/*.class");
 
         for(Resource resource : resources) {

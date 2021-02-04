@@ -21,7 +21,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import javax.sql.DataSource;
 
 //不再一个个注册映射器类，而是扫描类路径来发现映射器类
-@MapperScan({"com.hjg.mybatis.spring.com.hjg.mybatis.spring.example.mapper"})
+@MapperScan({"com.hjg.mybatis.spring.example.mapper"})
 @Configuration
 @PropertySource({"classpath:/com/hjg/jdbc/jdbc.properties"})
 @ComponentScan({"com.hjg.mybatis.spring.example.service.impl"})
@@ -77,7 +77,7 @@ public class AppConfig {
 
         //通过一个路径获取多个Resource对象
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        Resource[] resources = resolver.getResources("com/hjg/mybatis/mapper/*Mapper.xml");
+        Resource[] resources = resolver.getResources("classpath:com/hjg/mybatis/mapper/**/*Mapper.xml");
         sqlSessionFactoryBean.setMapperLocations(resources);
 
         return sqlSessionFactoryBean.getObject();

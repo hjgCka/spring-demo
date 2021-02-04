@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/util
+        https://www.springframework.org/schema/util/spring-util.xsd">
+
+    <!--注册多种后置处理器，支持@Autowired等注解-->
+    <context:annotation-config/>
+
+    <!--自动实例化这个包下面的带上了@Repository等注解的类。-->
+    <context:component-scan base-package="com.hjg.spring.transaction.service.impl"/>
+
+    <!--<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations" value="classpath:com/foo/jdbc.properties"/>
+    </bean>-->
+    <!--
+       这是更推荐的方式，但其实只是实例化了org.springframework.beans.factory.config.PropertyPlaceholderConfigurer对象。
+       这个对象是BeanFactoryPostProcessor，作用于bean的配置元数据，用来替换xml文件中的<bean>元素中的占位符。
+    -->
+    <context:property-placeholder location="classpath:/datasource/jdbc.properties"/>
+
+    <!--配置数据源对象-->
+    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
+        <property name="jdbcUrl" value="${db.url}"/>
+        <property name="username" value="${db.username}"/>
+        <property name="password" value="${db.password}"/>
+    </bean>
+
+    <!--配置事务管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <constructor-arg name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--配置Mybatis对象，它是一个FactoryBean，id属性表示的bean是它的getObject返回的对象-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+
+        <!--这2个属性实际上Resource对象，这里使用了默认的转换器-->
+        <property name="configLocation" value="classpath:com/hjg/spring/transaction/mybatis/mybatis-config.xml"/>
+        <property name="mapperLocations" value="classpath:com/hjg/spring/transaction/mybatis/mapper/**/*Mapper.xml"/>
+    </bean>
+
+    <!--这个配置对象用于扫描Mapper接口，不用每个接口都加上@Mapper注解-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.hjg.spring.transaction.mapper"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+</beans>

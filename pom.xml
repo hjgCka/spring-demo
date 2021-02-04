@@ -13,11 +13,14 @@
         <module>spring-resource</module>
         <module>spring-spel</module>
         <module>spring-core</module>
+        <module>spring-transaction</module>
     </modules>
     <packaging>pom</packaging>
 
     <properties>
         <spring.version>5.2.6.RELEASE</spring.version>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
     </properties>
 
     <dependencies>
