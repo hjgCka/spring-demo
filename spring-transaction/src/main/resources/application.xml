@@ -71,13 +71,19 @@
       不论切点表达式是否定位到service层或service.impl层。
       这个代理被配置了事务增强，在代理上调用某些方法时，一个事务会开始、挂起、标记为只读等等，
       这些基于方法上的事务配置。
+
+      默认使用JDK动态代理。
     -->
-    <aop:config>
+    <aop:config proxy-target-class="false">
         <!--Service层接口的返回任何值、任何方法、任何方法参数都会被增强-->
         <!--切点表达式定位于接口或实现类时，使用的都是JDK的动态代理。从日志可知。
         创建的代理，使用JDK动态代理创建。-->
         <aop:pointcut id="serviceMethods" expression="execution(* com.hjg.spring.transaction.service.impl.*ServiceImpl*.*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods"/>
     </aop:config>
+
+    <!--启用基于注解的事务行为-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <context:component-scan base-package="com.hjg.spring.transaction.job.impl"/>
 
 </beans>

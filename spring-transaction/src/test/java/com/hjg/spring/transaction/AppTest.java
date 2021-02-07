@@ -1,5 +1,6 @@
 package com.hjg.spring.transaction;
 
+import com.hjg.spring.transaction.job.BlogJob;
 import com.hjg.spring.transaction.mapper.BlogMapper;
 import com.hjg.spring.transaction.model.Blog;
 import com.hjg.spring.transaction.service.BlogService;
@@ -9,7 +10,10 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -66,5 +70,32 @@ public class AppTest {
                 newTitle);
 
         System.out.println(blog);
+    }
+
+    /**
+     * BlogServiceImpl2返回BlogServiceImpl2$$EnhancerBySpringCGLIB$$7e05728。
+     * 说明返回的是一个CGLIB的代理类。
+     *
+     * BlogService返回com.sun.proxy.$Proxy20，是一个JDK的代理类。
+     */
+    @Test
+    public void serviceClassTest() {
+        BlogServiceImpl2 blogServiceImpl2 = applicationContext.getBean(BlogServiceImpl2.class);
+        System.out.println(blogServiceImpl2.getClass().getName());
+
+        BlogService blogService = applicationContext.getBean(BlogService.class);
+        System.out.println(blogService.getClass().getName());
+    }
+
+    @Test
+    public void transactionalTest() throws NoSuchMethodException {
+        BlogJob blogJob = applicationContext.getBean(BlogJob.class);
+
+        Method findMethod = BlogJob.class.getMethod("findById", String.class);
+        System.out.println(findMethod.getName());
+
+        //CGLIB产生的代理类，并没有获取方法上的注解信息。
+        Annotation[] annotations = findMethod.getAnnotations();
+        Arrays.stream(annotations).forEach(e -> System.out.println(e));
     }
 }
