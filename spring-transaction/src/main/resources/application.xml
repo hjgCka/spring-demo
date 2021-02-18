@@ -82,7 +82,7 @@
         <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods"/>
     </aop:config>
 
-    <!--启用基于注解的事务行为-->
+    <!--启用基于注解的事务行为，即使不配置属性，也是默认寻找transactionManager这个bean-->
     <tx:annotation-driven transaction-manager="transactionManager"/>
     <context:component-scan base-package="com.hjg.spring.transaction.job.impl"/>
 
