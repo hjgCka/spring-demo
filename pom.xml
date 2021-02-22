@@ -14,6 +14,7 @@
         <module>spring-spel</module>
         <module>spring-core</module>
         <module>spring-transaction</module>
+        <module>spring-dynamic-register</module>
     </modules>
     <packaging>pom</packaging>
 
