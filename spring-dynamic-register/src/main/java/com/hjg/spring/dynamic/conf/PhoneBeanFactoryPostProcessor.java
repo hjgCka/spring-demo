@@ -10,6 +10,7 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import java.util.Date;
 
 /**
+ * 创痛的BeanFactoryPostProcessor。
  * @description:
  * @author: hjg
  * @createdOn: 2021/2/22

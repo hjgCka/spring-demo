@@ -7,6 +7,7 @@ import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.type.AnnotationMetadata;
 
 /**
+ * 一般配合注解使用，还有ImportSelector等注解。
  * @description:
  * @author: hjg
  * @createdOn: 2021/2/22
