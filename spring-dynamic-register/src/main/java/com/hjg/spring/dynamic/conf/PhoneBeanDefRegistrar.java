@@ -20,7 +20,7 @@ public class PhoneBeanDefRegistrar implements ImportBeanDefinitionRegistrar {
         String[] phones = (String[]) importingClassMetadata.getAnnotationAttributes(EnableOtherPhone.class.getName()).get("phones");
 
         if(phones.length == 0) {
-            System.out.println("no phones!1");
+            System.out.println("no phones!!!");
         } else {
             for(String name : phones) {
                 BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder.genericBeanDefinition(Phone.class);
