@@ -1,5 +1,6 @@
 package com.hjg.spring.dynamic.conf;
 
+import com.hjg.spring.dynamic.model.Phone;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -11,6 +12,13 @@ import org.springframework.context.annotation.Configuration;
 @EnableOtherPhone(phones = {"Vivo", "Lenovo"})
 @Configuration
 public class AppConfig {
+
+    @Bean
+    Phone nokia() {
+        Phone nokia = new Phone();
+        nokia.setName("Nokia");
+        return nokia;
+    }
 
     @Bean
     PhoneBeanFactoryPostProcessor phoneBeanFactoryPostProcessor() {
